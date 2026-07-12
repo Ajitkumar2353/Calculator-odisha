@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#222;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.calculator{
+    width:360px;
+    background:#333;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,.5);
+}
+#display{
+    width:100%;
+    height:60px;
+    font-size:28px;
+    text-align:right;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+    padding:10px;
+}
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+button{
+    height:55px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+button:hover{
+    opacity:.85;
+}
+</style>
+</head>
+<body>
+
+<div class="calculator">
+
+<input type="text" id="display" readonly>
+
+<div class="buttons">
+<button onclick="clearDisplay()">C</button>
+<button onclick="del()">⌫</button>
+<button onclick="add('%')">%</button>
+<button onclick="add('/')">÷</button>
+<button onclick="add('*')">×</button>
+
+<button onclick="add('7')">7</button>
+<button onclick="add('8')">8</button>
+<button onclick="add('9')">9</button>
+<button onclick="add('-')">-</button>
+<button onclick="square()">x²</button>
+
+<button onclick="add('4')">4</button>
+<button onclick="add('5')">5</button>
+<button onclick="add('6')">6</button>
+<button onclick="add('+')">+</button>
+<button onclick="sqrt()">√</button>
+
+<button onclick="add('1')">1</button>
+<button onclick="add('2')">2</button>
+<button onclick="add('3')">3</button>
+<button onclick="power()">xʸ</button>
+<button onclick="pi()">π</button>
+
+<button onclick="add('0')">0</button>
+<button onclick="add('.')">.</button>
+<button onclick="sin()">sin</button>
+<button onclick="cos()">cos</button>
+<button onclick="tan()">tan</button>
+
+<button onclick="log()">log</button>
+<button onclick="ln()">ln</button>
+<button onclick="fact()">n!</button>
+<button onclick="exp()">exp</button>
+<button onclick="calculate()">=</button>
+</div>
+
+</div>
+
+<script>
+
+let d=document.getElementById("display");
+
+function add(v){d.value+=v;}
+function clearDisplay(){d.value="";}
+function del(){d.value=d.value.slice(0,-1);}
+function calculate(){
+try{
+d.value=eval(d.value);
+}catch{
+d.value="Error";
+}
+}
+function sqrt(){d.value=Math.sqrt(eval(d.value));}
+function square(){d.value=Math.pow(eval(d.value),2);}
+function power(){d.value+="**";}
+function pi(){d.value+=Math.PI;}
+function sin(){d.value=Math.sin(eval(d.value)*Math.PI/180);}
+function cos(){d.value=Math.cos(eval(d.value)*Math.PI/180);}
+function tan(){d.value=Math.tan(eval(d.value)*Math.PI/180);}
+function log(){d.value=Math.log10(eval(d.value));}
+function ln(){d.value=Math.log(eval(d.value));}
+function exp(){d.value=Math.exp(eval(d.value));}
+
+function fact(){
+let n=eval(d.value);
+if(n<0){d.value="Error";return;}
+let f=1;
+for(let i=1;i<=n;i++)f*=i;
+d.value=f;
+}
+
+</script>
+
+</body>
+</html>
